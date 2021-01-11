@@ -8,7 +8,7 @@ export function getOriginalBoardColor(tempStateBoard){
         var color = white;
                 
         for (var j=0; j<row.length; j++){
-                                  
+            
             if ((i+1)%2 !== 0){
                 color = white;
                 if ((j+1)%2 === 0){

@@ -1,4 +1,4 @@
-import { getLegalMovesPawn } from "./legalMoves/getLegalMovesPawn.js";
+import { getLegalMoves } from "./legalMoves/getLegalMoves.js";
 import { getBoardFromStateBoard } from "./getStateBoard.js";
 
 export function noPreSelection(selectedPiece, legalMoves, tempStateBoard, piece, row, col){
@@ -11,8 +11,8 @@ export function noPreSelection(selectedPiece, legalMoves, tempStateBoard, piece,
     if(piece > 0){
         color = "white";
     }
-
-    legalMoves = getLegalMovesPawn(board, [row+1, col+1], color);
+    legalMoves = getLegalMoves(board, [row+1, col+1], color);
+    //alert(legalMoves)
     selectedPiece.push(legalMoves);
     
     // highlight legalMoves

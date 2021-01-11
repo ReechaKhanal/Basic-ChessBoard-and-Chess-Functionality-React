@@ -32,7 +32,6 @@ class ChessBoard extends Component{
     };
      
     handleClick(piece, row, col){
-        
         var selectedPiece = this.state.selectedPiece.slice()
         var tempStateBoard = this.state.stateBoard.slice();
         var legalMoves = [];
