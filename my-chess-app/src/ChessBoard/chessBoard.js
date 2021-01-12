@@ -11,6 +11,7 @@ class ChessBoard extends Component{
         this.state = {
             stateBoard: getInitialBoard(),
             selectedPiece: [],
+            turn: "White's Turn"
         };
     }
 

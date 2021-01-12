@@ -6,68 +6,33 @@ export function getLegalMovesRook(board, currentPosition, pieceColor){
 
     // output array that holds all possible moves for a Rook
     var legalMoves = [];
-    
-    var tempRow = row;
-    var tempCol = col+1;
-    while ((tempCol > 0) && (tempCol < 9)){
-        if (board[tempRow][tempCol] == null){
-            break;
-        }
-        else if (board[tempRow][tempCol] === 0){
-            legalMoves.push([tempRow, tempCol])
-        }else{
-            legalMoves.push([tempRow, tempCol])
-            break;
-        }
-        tempCol = tempCol + 1
-    } // end first while
+    legalMoves = getValidMoves(board, row, col+1, 0, 1, legalMoves, pieceColor)
+    legalMoves = getValidMoves(board, row, col-1, 0, -1, legalMoves, pieceColor)
+    legalMoves = getValidMoves(board, row+1, col, 1, 0, legalMoves, pieceColor)
+    legalMoves = getValidMoves(board, row-1, col, -1, 0, legalMoves, pieceColor)
 
-    tempRow = row;
-    tempCol = col - 1;
-    while ((tempCol > 0) && (tempCol < 9)){
-
-        if (board[tempRow][tempCol] == null){
-            break;
-        }
-        else if (board[tempRow][tempCol] === 0){
-            legalMoves.push([tempRow, tempCol])
-        }else{
-            legalMoves.push([tempRow, tempCol])
-            break;
-        }
-        tempCol = tempCol - 1
-    } // end second while
-
-    tempRow = row - 1;
-    tempCol = col;     
-    while ((tempRow > 0) && (tempRow < 9)){
-
-        if (board[tempRow][tempCol] == null){
-            break;
-        }
-        else if (board[tempRow][tempCol] === 0){
-            legalMoves.push([tempRow, tempCol])
-        }else{
-            legalMoves.push([tempRow, tempCol])
-            break;
-        }
-        tempRow = tempRow - 1
-    } // end third while
-
-    tempRow = row + 1;
-    tempCol = col;     
-    while ((tempRow > 0) && (tempRow < 9)){
-
-        if (board[tempRow][tempCol] == null){
-            break;
-        }
-        else if (board[tempRow][tempCol] === 0){
-            legalMoves.push([tempRow, tempCol])
-        }else{
-            legalMoves.push([tempRow, tempCol])
-            break;
-        }
-        tempRow = tempRow + 1
-    } // end Fourth while    
     return legalMoves
-} // end function getLegalMovesBishop
+}
+
+function getValidMoves(board, r, c, row_increment, col_increment, legalMoves, pieceColor){
+    
+    while (((r > 0) && (r < 9)) && ((c > 0) && (c < 9))){    
+        
+        var currentColor = "black";
+        if (board[r][c] > 0){
+            currentColor = "white";
+        }
+        if (board[r][c] === 0){
+            legalMoves.push([r, c])
+        }
+        else if ((board[r][c] != null) && (pieceColor !== currentColor)){
+            legalMoves.push([r, c])
+            break;
+        }else{
+            break;
+        }
+        r = r + row_increment
+        c = c + col_increment
+    }
+    return legalMoves
+}
