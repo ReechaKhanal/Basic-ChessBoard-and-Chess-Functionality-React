@@ -11,7 +11,7 @@ class ChessBoard extends Component{
         this.state = {
             stateBoard: getInitialBoard(),
             selectedPiece: [],
-            turn: "White's Turn"
+            turn: 1,
         };
     }
 
@@ -52,8 +52,17 @@ class ChessBoard extends Component{
     }
 
     render(){
-        var stateBoard1 = this.state.stateBoard.slice()
+        var stateBoard1 = this.state.stateBoard.slice();
+        var turn = this.state.turn;
+        var turnText = "White's Turn";
+        if (turn === 0){
+            turnText = "Black's Turn";
+        }
         return(
+            <>
+            <span>
+                {turnText}
+            </span>
             <div>
                 {stateBoard1.map((rows, index) => {
                     return(
@@ -66,6 +75,7 @@ class ChessBoard extends Component{
                 })}
                 <br></br>
             </div>
+            </>
         );
     }
 }
