@@ -33,4 +33,47 @@ export function getLegalMoves(board, currentPosition, pieceColor){
     else if((board[row][col] === 8) || (board[row][col] === -8)){
         return getLegalMovesKing(board, currentPosition, pieceColor);
     }
-}
+} // end function getLegalMoves
+
+export function getAllLegalMoves(board, turn){
+    var legalMoves = []
+    var output = []
+    if (turn === 1){
+        // WHITE'S Turn
+        for(var i = 0; i < board.length; i++){
+            var row = board[i]
+            for (var j= 0; j < row.length; j++){
+                
+                var value = row[j]
+                if ((value == null) || (value <= 0)){
+                    // do nothing
+                }else{
+                    output = getLegalMoves(board, [i, j], "white")
+                }
+                for(var k = 0; k < output.length; k++){
+                    legalMoves.push(output[i])
+                } // end the inner for loop 
+            }// end first for loop
+        } // end second for loop
+
+    }else{
+        for(var i = 0; i < board.length; i++){
+            var row = board[i]
+            for (var j= 0; j < row.length; j++){
+                
+                var value = row[j]
+                if ((value == null) || (value >= 0)){
+                    // do nothing
+                }else{
+                    output = getLegalMoves(board, [i, j], "black")
+                }
+                for(var k = 0; k < output.length; k++){
+                    legalMoves.push(output[i])
+                } // end the inner for loop 
+            }// end first for loop
+        } // end second for loop
+    }
+    
+    return legalMoves
+    
+} // end function getAllLegalMoves(board, turn )
