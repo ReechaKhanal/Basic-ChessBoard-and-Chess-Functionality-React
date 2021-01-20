@@ -4,7 +4,7 @@ export function lookForCheck(turn, board){
     
     // we are looking for the black king if white just played and vice versa
     var kingColor = "black";
-    if(turn == 0){
+    if(turn === 0){
         kingColor = "white";
     }
     // get the King's position
@@ -15,25 +15,24 @@ export function lookForCheck(turn, board){
 
     for (var i=0; i< legalMoves.length; i++){
         // if the king Falls in Position of other Player's legal Moves
-        if(kingPosition == legalMoves[i]){
-            return True
+        if(kingPosition === legalMoves[i]){
+            return true
         }
     }
-    return False   
+    return false   
 
 } // end function look for check
 
 function getKingRowCol(board, kingColor){
     var kingValue = 8;
-    if(kingColor == "black"){
+    if(kingColor === "black"){
         kingValue = -8
     }
-
-    for (var i =0; i <board.length; i++)
+    for (var i =0; i <board.length; i++){
         var row = board[i];
         for (var j=0; j<row.length; j++){
             
-            if (row[j] == kingValue){
+            if (row[j] === kingValue){
                 return [i, j]
             }// end if
         } // end inner for loop

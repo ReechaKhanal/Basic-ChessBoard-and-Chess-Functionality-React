@@ -38,36 +38,37 @@ export function getLegalMoves(board, currentPosition, pieceColor){
 export function getAllLegalMoves(board, turn){
     var legalMoves = []
     var output = []
+    var i = 0, j = 0, k = 0, value = 0
     if (turn === 1){
         // WHITE'S Turn
-        for(var i = 0; i < board.length; i++){
+        for(i = 0; i < board.length; i++){
             var row = board[i]
-            for (var j= 0; j < row.length; j++){
+            for (j= 0; j < row.length; j++){
                 
-                var value = row[j]
+                value = row[j]
                 if ((value == null) || (value <= 0)){
                     // do nothing
                 }else{
                     output = getLegalMoves(board, [i, j], "white")
                 }
-                for(var k = 0; k < output.length; k++){
+                for(k = 0; k < output.length; k++){
                     legalMoves.push(output[i])
                 } // end the inner for loop 
             }// end first for loop
         } // end second for loop
 
     }else{
-        for(var i = 0; i < board.length; i++){
-            var row = board[i]
-            for (var j= 0; j < row.length; j++){
+        for(i = 0; i < board.length; i++){
+            row = board[i]
+            for (j= 0; j < row.length; j++){
                 
-                var value = row[j]
+                value = row[j]
                 if ((value == null) || (value >= 0)){
                     // do nothing
                 }else{
                     output = getLegalMoves(board, [i, j], "black")
                 }
-                for(var k = 0; k < output.length; k++){
+                for(k = 0; k < output.length; k++){
                     legalMoves.push(output[i])
                 } // end the inner for loop 
             }// end first for loop
