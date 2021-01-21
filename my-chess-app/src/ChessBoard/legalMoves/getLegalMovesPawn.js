@@ -43,13 +43,12 @@ export function getLegalMovesPawn(board, currentPosition, pieceColor){
         }
         
         currentColor  = "black";
-        if (board[row+increment][col+increment] > 0){
+        if (board[row+increment][col-increment] > 0){
             currentColor = "white";
         }
         if((board[row+increment][col-increment] !== 0) && (board[row+increment][col-increment] !== null) && (currentColor !== pieceColor)){
             legalMoves.push([row+increment, col-increment]);
         }
-
     }
     return legalMoves;
 }

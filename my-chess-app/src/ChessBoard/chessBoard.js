@@ -4,6 +4,20 @@ import ChessSquare from "./Square";
 import { getOriginalBoardColor, getInitialBoard } from "./getOriginalBoardProperties.js";
 import { noPreSelection, withPreSelection } from "./moveSimulation.js";
 
+import pawn from './Images/pawn.png';
+import blackPawn from './Images/black_pawn.png';
+import rook from './Images/rook.png';
+import blackRook from './Images/black_rook.png';
+import knight from './Images/knight.png';
+import blackKnight from './Images/black_knight.png';
+import bishop from './Images/bishop.png';
+import blackBishop from './Images/black_bishop.png';
+import queen from './Images/queen.png';
+import blackQueen from './Images/black_queen.png';
+import king from './Images/king.png';
+import blackKing from './Images/black_king.png';
+import empty from './Images/empty.svg';
+
 class ChessBoard extends Component{
 
     constructor(props) {
@@ -17,11 +31,43 @@ class ChessBoard extends Component{
         };
     }
 
+    getImageType(value){
+        var dict = {
+            1: pawn,
+            4: bishop,
+            5: knight,
+            6: rook,
+            7: queen,
+            8: king,
+        };
+        var src1 = blackPawn;
+        if (value === -4){
+            src1 = blackBishop;
+        } else if (value === -5){
+            src1 = blackKnight;
+        } else if (value === -6){
+            src1 = blackRook;
+        } else if (value === -7){
+            src1 = blackQueen;
+        } else if (value === -8){
+            src1 = blackKing;
+        } else if (value === 0){
+            src1 = empty;
+        } else if (value === -1){
+            src1 = blackPawn;
+        } else {
+            src1 = dict[value]
+        }
+        return src1
+    }
+
     renderSquare(type, color, row, col){
+        
         return(
             <ChessSquare
                 value = {type}
                 color = {color}
+                source = {this.getImageType(type)}
                 onClick={()=>this.handleClick(type, row, col)}
             />
         )
@@ -80,15 +126,17 @@ class ChessBoard extends Component{
         if (turn === false){
             turnText = "Black's Turn";
         }
+
         var takenBlackPieces = this.state.takenBlackPieces;
         var takenWhitePieces = this.state.takenWhitePieces;
 
         var takenBlack = takenBlackPieces.map((piece, idx) => {
-            return <li key={idx}>{piece}</li> 
+            return <><img className = "takenPiecePic" alt="" src = {this.getImageType(piece)}/></> 
         });
         
         var takenWhite = takenWhitePieces.map((piece, idx) => {
-            return <li key={idx}>{piece}</li> 
+            return <><img className = "takenPiecePic" alt="" src = {this.getImageType(piece)}/></> 
+            
         });
         return(
             <>

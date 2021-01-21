@@ -6,12 +6,12 @@ class ChessSquare extends React.Component{
         const styles = {
           buttonStyle: {
               backgroundColor: this.props.color,
-          }  
-        };
-        
+          }
+        };     
+
         return(
             <button className = "SquareBox" style = {styles.buttonStyle} onClick={() => this.props.onClick()}>
-                {this.props.value}
+                <img className = "image" alt="" src =  {this.props.source}/>
             </button>
         );
     }
