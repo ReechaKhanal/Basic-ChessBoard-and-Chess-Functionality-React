@@ -1,25 +1,28 @@
 import { getAllLegalMoves } from "./legalMoves/getLegalMoves";
 
-export function lookForCheck(turn, board){
+export function lookForCheck(color, board){
     
-    // we are looking for the black king if white just played and vice versa
-    var kingColor = "black";
-    if(turn === 0){
-        kingColor = "white";
+    var opponentColor = "white";
+    if (color === "white"){
+        opponentColor = "black";
     }
     // get the King's position
-    var kingPosition = getKingRowCol(board, kingColor)
-    
-    // legalMoves we are looking for should be opposite of the King we looked for and vice versa
-    var legalMoves =  getAllLegalMoves(board, turn)
+    var kingPosition = getKingRowCol(board, color)
+    var kingRow = kingPosition[0];
+    var kingCol = kingPosition[1];
 
+    // legalMoves we are looking for should be opposite of the King we looked for and vice versa
+    var legalMoves =  getAllLegalMoves(board, opponentColor)
+    
     for (var i=0; i< legalMoves.length; i++){
-        // if the king Falls in Position of other Player's legal Moves
-        if(kingPosition === legalMoves[i]){
+        var r = legalMoves[i][0]
+        var c = legalMoves[i][1]
+        // if the king Falls in Position of opponent's legal Moves
+        if((r === kingRow) && (c === kingCol)){
             return true
         }
     }
-    return false   
+    return false
 
 } // end function look for check
 

@@ -16,6 +16,7 @@ export function getLegalMovesKing(board, currentPosition, pieceColor){
     legalMoves = checkIfValid(board, row-1, col+1, legalMoves, pieceColor)
     legalMoves = checkIfValid(board, row-1, col-1, legalMoves, pieceColor)
 
+    // check for castling
     return legalMoves
 }
 

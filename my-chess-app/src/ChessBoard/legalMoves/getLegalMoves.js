@@ -35,46 +35,31 @@ export function getLegalMoves(board, currentPosition, pieceColor){
     }
 } // end function getLegalMoves
 
-export function getAllLegalMoves(board, turn){
-    var legalMoves = []
-    var output = []
-    var i = 0, j = 0, k = 0, value = 0
-    if (turn === 1){
-        // WHITE'S Turn
-        for(i = 0; i < board.length; i++){
-            var row = board[i]
-            for (j= 0; j < row.length; j++){
-                
-                value = row[j]
-                if ((value == null) || (value <= 0)){
-                    // do nothing
-                }else{
-                    output = getLegalMoves(board, [i, j], "white")
-                }
-                for(k = 0; k < output.length; k++){
-                    legalMoves.push(output[i])
-                } // end the inner for loop 
-            }// end first for loop
-        } // end second for loop
+export function getAllLegalMoves(board, color){
 
-    }else{
-        for(i = 0; i < board.length; i++){
-            row = board[i]
-            for (j= 0; j < row.length; j++){
+    var legalMoves = [];
+    var output = [];
+    var i = 0, j = 0, k = 0, value = 0;
+
+    var pieceColor = "";
+    
+    for(i = 0; i < board.length; i++){
+        var row = board[i];
+        for (j= 0; j < row.length; j++){
                 
-                value = row[j]
-                if ((value == null) || (value >= 0)){
-                    // do nothing
-                }else{
-                    output = getLegalMoves(board, [i, j], "black")
-                }
+            value = row[j];
+            pieceColor = "white";
+            if(value < 0){
+                pieceColor = "black";
+            }
+            
+            if((pieceColor === color) && (value !== 0) && (value !== null)){
+                output = getLegalMoves(board, [i, j], color)
                 for(k = 0; k < output.length; k++){
-                    legalMoves.push(output[i])
+                    legalMoves.push(output[k]);
                 } // end the inner for loop 
-            }// end first for loop
-        } // end second for loop
-    }
-    
+            }
+        }// end first for loop
+    } // end second for loop
     return legalMoves
-    
-} // end function getAllLegalMoves(board, turn )
+}

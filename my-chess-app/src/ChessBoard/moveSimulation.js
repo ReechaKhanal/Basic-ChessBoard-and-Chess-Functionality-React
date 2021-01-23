@@ -1,5 +1,6 @@
 import { getLegalMoves } from "./legalMoves/getLegalMoves.js";
 import { getBoardFromStateBoard } from "./getStateBoard.js";
+import { lookForCheck } from "./lookForCheck.js";
 
 export function noPreSelection(selectedPiece, legalMoves, tempStateBoard, piece, row, col){
     // store current piece info for next time
@@ -11,6 +12,7 @@ export function noPreSelection(selectedPiece, legalMoves, tempStateBoard, piece,
     if(piece > 0){
         color = "white";
     }
+
     legalMoves = getLegalMoves(board, [row+1, col+1], color);
     selectedPiece.push(legalMoves);
     
@@ -20,6 +22,7 @@ export function noPreSelection(selectedPiece, legalMoves, tempStateBoard, piece,
         var c = legalMoves[k][1] - 1;
         tempStateBoard[r][c] = [tempStateBoard[r][c][0], brown, tempStateBoard[r][c][2], tempStateBoard[r][c][3]];
     }
+    // }
     return [tempStateBoard, selectedPiece]
 }
 
@@ -29,7 +32,14 @@ export function withPreSelection(selectedPiece, legalMoves, tempStateBoard, piec
     var selectedRow = selectedPieceInfo[1];
     var selectedCol = selectedPieceInfo[2];
     var takenPiece = null;
+    var check = null;
     
+    var opponentColor = "black";
+    //alert([piece, selectedPieceInfo[0]])
+    if (selectedPieceInfo[0] < 0){
+        opponentColor = "white";
+    }
+
     for (var i=0; i< legalMoves.length; i++){
         var r1 = legalMoves[i][0] - 1
         var c1 = legalMoves[i][1] - 1
@@ -41,9 +51,18 @@ export function withPreSelection(selectedPiece, legalMoves, tempStateBoard, piec
             if(piece !== 0){
                 takenPiece = piece
             }
+
+            // Look for check
+            if (lookForCheck(opponentColor, getBoardFromStateBoard(tempStateBoard))){
+                // There is a check
+                check = 0;
+                if(opponentColor === "white"){
+                    check = 1;
+                }
+            }
             turn = !turn;
             break;
         }
     }
-    return [tempStateBoard, [], turn, takenPiece]
+    return [tempStateBoard, [], turn, takenPiece, check]
 }
