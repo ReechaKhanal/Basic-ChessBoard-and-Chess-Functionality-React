@@ -1,7 +1,6 @@
 import React from "react";
 import './Square.css';
 
-// individual square in chess
 class ChessSquare extends React.Component{
     render(){
         const styles = {
