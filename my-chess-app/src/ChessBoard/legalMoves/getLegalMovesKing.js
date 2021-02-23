@@ -21,7 +21,7 @@ export function getLegalMovesKing(board, currentPosition, pieceColor){
 }
 
 function checkIfValid(board, r, c, legalMoves, pieceColor){
-
+    
     if ((r>0 && r <9) && (c >0 && c < 9)){
 
         var currentColor = "black";

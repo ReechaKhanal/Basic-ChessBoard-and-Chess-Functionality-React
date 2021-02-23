@@ -1,5 +1,6 @@
 import { getAllLegalMoves } from "./legalMoves/getLegalMoves";
 
+
 export function lookForCheck(color, board){
     
     var opponentColor = "white";
@@ -26,7 +27,7 @@ export function lookForCheck(color, board){
 
 } // end function look for check
 
-function getKingRowCol(board, kingColor){
+export function getKingRowCol(board, kingColor){
     var kingValue = 8;
     if(kingColor === "black"){
         kingValue = -8
