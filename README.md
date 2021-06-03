@@ -1,4 +1,4 @@
-# Chess-Application-in-React
+# Basic Chess Board and Chess Functionality in Reach
 A basic chess board supporting chess functionality in react.
 
 This application mimics a Chess Board and accepts all moves accepted in a game of Chess.
